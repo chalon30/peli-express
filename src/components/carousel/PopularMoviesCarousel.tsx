@@ -21,7 +21,7 @@ export default function PopularMoviesCarousel() {
       {/* Etiqueta */}
       <div
         className="
-          inline-block
+          inline-flex
           bg-red-700 bg-opacity-90
           rounded-full
           px-6 py-2
@@ -43,6 +43,7 @@ export default function PopularMoviesCarousel() {
           -translate-x-1/2
           -translate-y-1/2
           z-10
+          text-center 
         "
       >
         Películas Populares
