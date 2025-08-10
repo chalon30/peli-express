@@ -19,7 +19,7 @@ export default function UpcomingMoviesCalendar() {
   if (!movies.length) return null;
 
   return (
-    <section >
+    <section>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {movies.map((movie) => (
           <div
