@@ -61,7 +61,7 @@ const HeaderMobile = () => {
         <ul className="flex flex-col space-y-6">
           <li>
             <Link
-              href="/"
+              href="/catalog"
               className="text-lg font-semibold hover:text-red-400 hover:drop-shadow-[0_0_6px_red] transition-all duration-300 ease-in-out"
               onClick={toggleMenu}
             >
