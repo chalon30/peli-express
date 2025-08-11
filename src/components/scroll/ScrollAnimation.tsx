@@ -44,7 +44,7 @@ export default function ScrollAnimation({
       className={`${className} ${
         isVisible
           ? animationClass
-          : "opacity-0 translate-y-10 pointer-events-none"
+          : "opacity-0  pointer-events-none"
       } transition-all duration-700 ease-out will-change-transform will-change-opacity`}
     >
       {children}
