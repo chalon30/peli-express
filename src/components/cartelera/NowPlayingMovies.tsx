@@ -57,16 +57,16 @@ export default function NowPlayingMovies() {
       )}
 
       {/* Grid de películas */}
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {!loading &&
           !error &&
           movies.map((movie) => (
             <div
               key={movie.id}
-              className="relative group rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+              className="relative group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300"
             >
               <div
-                className="w-full h-[180px] sm:h-[220px] bg-cover bg-center"
+                className="w-full h-[140px] sm:h-[180px] bg-cover bg-center"
                 style={{
                   backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
                 }}
@@ -74,11 +74,11 @@ export default function NowPlayingMovies() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
               </div>
 
-              <div className="absolute bottom-0 p-3 sm:p-4 text-white bg-gradient-to-t from-black/80 via-transparent to-transparent w-full">
-                <h3 className="text-base sm:text-lg font-semibold drop-shadow-md truncate">
+              <div className="absolute bottom-0 p-2 sm:p-3 text-white bg-gradient-to-t from-black/80 via-transparent to-transparent w-full">
+                <h3 className="text-sm sm:text-base font-semibold drop-shadow-md truncate">
                   {movie.title}
                 </h3>
-                <p className="text-xs sm:text-sm opacity-80 line-clamp-2">
+                <p className="text-[10px] sm:text-xs opacity-80 line-clamp-2">
                   {movie.overview || "Sinopsis no disponible."}
                 </p>
               </div>
@@ -89,17 +89,17 @@ export default function NowPlayingMovies() {
       {/* Controles de paginación */}
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6 mb-8">
         <button
-          className="px-6 py-3 bg-red-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition w-full sm:w-auto"
+          className="px-5 py-2.5 bg-red-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition w-full sm:w-auto"
           disabled={page === 1 || loading}
           onClick={() => setPage((prev) => prev - 1)}
         >
           ⬅ Anterior
         </button>
-        <span className="text-white select-none text-base sm:text-lg">
+        <span className="text-white select-none text-sm sm:text-base">
           Página {page} de {totalPages}
         </span>
         <button
-          className="px-6 py-3 bg-red-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition w-full sm:w-auto"
+          className="px-5 py-2.5 bg-red-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition w-full sm:w-auto"
           disabled={page === totalPages || loading}
           onClick={() => setPage((prev) => prev + 1)}
         >

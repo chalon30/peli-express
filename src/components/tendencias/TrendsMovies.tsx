@@ -28,6 +28,8 @@ export default function TrendsMovies() {
           text-xl
           tracking-wide
           drop-shadow-[0_0_8px_#ff0000]
+          hover:bg-red-600
+          hover:drop-shadow-[0_0_16px_#ff4d4d]
           select-none
           absolute
           left-1/2
