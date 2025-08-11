@@ -74,7 +74,7 @@ export default function UpcomingMoviesCarousel() {
             delay: 3000,
             disableOnInteraction: false,
           }}
-          loop={true}
+          loop={movies.length >= 6}
           className="w-full"
         >
           {movies.map((movie) => (
@@ -83,10 +83,19 @@ export default function UpcomingMoviesCarousel() {
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
-                  className="rounded-xl transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                  className="rounded-xl transition-transform duration-500 cursor-pointer md:group-hover:scale-110"
                 />
-                {/* Overlay con fecha y botón trailer */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 space-y-2">
+                {/* Overlay visible siempre en móviles, solo en hover en desktop */}
+                <div
+                  className="
+                    absolute inset-0
+                    bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                    opacity-100
+                    md:opacity-0 md:group-hover:opacity-100
+                    transition-opacity duration-500
+                    flex flex-col justify-end p-4 space-y-2
+                  "
+                >
                   <h3 className="text-lg font-bold text-red-500 drop-shadow-[0_0_6px_#ff0000]">
                     {movie.title}
                   </h3>
