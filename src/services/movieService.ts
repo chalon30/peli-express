@@ -1,5 +1,6 @@
 import tmdbApi from "@/api/tmdbApi";
 import { MovieResponse, Movie } from "@/interfaces/Movie";
+import { MovieVideosResponse } from "@/interfaces/MovieVideo";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 dayjs.extend(isSameOrAfter);
@@ -32,6 +33,17 @@ export const getNowPlayingMovies = async (page: number = 1): Promise<MovieRespon
   });
   return data;
 };
+
+export const getMovieVideos = async (movieId: number) => {
+  try {
+    const { data } = await tmdbApi.get<MovieVideosResponse>(`/movie/${movieId}/videos`);
+    return data.results;
+  } catch (error) {
+    console.error("Error fetching videos for movie:", movieId, error);
+    return [];
+  }
+};
+
 
 
 //no sirve la api no devulve peliculas en estreno a la fecha posteior a hoy (recien me doy cuenta xd)

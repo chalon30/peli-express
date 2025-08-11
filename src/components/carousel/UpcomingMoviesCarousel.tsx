@@ -9,12 +9,23 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 
+import MovieTrailerModal from "@/components/trailer/MovieTrailer";
+
 export default function UpcomingMoviesCarousel() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
 
   useEffect(() => {
     getUpcomingMovies().then((data) => setMovies(data.results));
   }, []);
+
+  const openTrailer = (movieId: number) => {
+    setSelectedMovieId(movieId);
+  };
+
+  const closeTrailer = () => {
+    setSelectedMovieId(null);
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto py-6 px-4 relative">
@@ -74,20 +85,32 @@ export default function UpcomingMoviesCarousel() {
                   alt={movie.title}
                   className="rounded-xl transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
                 />
-                {/* Overlay con fecha */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
+                {/* Overlay con fecha y botón trailer */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 space-y-2">
                   <h3 className="text-lg font-bold text-red-500 drop-shadow-[0_0_6px_#ff0000]">
                     {movie.title}
                   </h3>
                   <span className="text-xs text-gray-300">
                     Estreno: {new Date(movie.release_date).toLocaleDateString("es-ES")}
                   </span>
+                  <button
+                    onClick={() => openTrailer(movie.id)}
+                    className="self-start bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white text-sm px-4 py-1 rounded shadow-md"
+                    type="button"
+                  >
+                    Ver Trailer
+                  </button>
                 </div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
+
+      {/* Modal trailer */}
+      {selectedMovieId && (
+        <MovieTrailerModal movieId={selectedMovieId} onClose={closeTrailer} />
+      )}
     </div>
   );
 }
