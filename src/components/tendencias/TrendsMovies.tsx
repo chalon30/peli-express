@@ -14,7 +14,7 @@ export default function TrendsMovies() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto py-12 px-4 relative">
+    <div className="max-w-8xl mx-auto py-14 px-4 relative">
       {/* Etiqueta */}
       <h2
         className="

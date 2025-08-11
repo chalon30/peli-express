@@ -51,7 +51,7 @@ export default function TopRatedMovie() {
 
   return (
     <section
-      className="relative w-full h-[350px] md:h-[480px] overflow-hidden shadow-2xl group animate-fadeIn mt-10"
+      className="relative w-full h-[350px] md:h-[480px] overflow-hidden shadow-2xl group animate-fadeIn"
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
         backgroundSize: "cover",
