@@ -8,68 +8,93 @@ export default function NowPlayingMovies() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const loadMovies = async (pageNum: number) => {
-    const data = await getNowPlayingMovies(pageNum);
-    setMovies(data.results);
-    setTotalPages(data.total_pages);
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getNowPlayingMovies(pageNum);
+      setMovies(data.results);
+      setTotalPages(data.total_pages);
+    } catch {
+      setError("Error al cargar las películas.");
+      setMovies([]);
+      setTotalPages(1);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     loadMovies(page);
   }, [page]);
 
-  if (movies.length === 0) return null;
-
   return (
-    <section className="mt-10">
-      <h2 className="text-white text-2xl font-bold mb-4">
-        🎬 Películas en Cartelera
+    <section className="mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-opacity-40 shadow-red-900">
+      <h2 className="flex items-center gap-3 text-white text-3xl md:text-4xl font-extrabold mb-6 tracking-wide drop-shadow-[0_0_12px_rgba(255,0,0,0.9)]">
+        <span className="flex-6 border-b border-red-600 ml-4"></span>
+        <span>Catálogo de Películas</span>
+        <span className="flex-1 border-b border-red-600 ml-4"></span>
       </h2>
+
+      {/* Mensajes de estado */}
+      {loading && (
+        <p className="text-white text-center mb-4 animate-pulse">Cargando películas...</p>
+      )}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      {!loading && !error && movies.length === 0 && (
+        <p className="text-gray-400 text-center mb-4">
+          No hay películas disponibles.
+        </p>
+      )}
 
       {/* Grid de películas */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {movies.map((movie) => (
-          <div
-            key={movie.id}
-            className="relative group rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
-          >
+        {!loading &&
+          !error &&
+          movies.map((movie) => (
             <div
-              className="w-full h-[250px] sm:h-[300px] bg-cover bg-center"
-              style={{
-                backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-              }}
+              key={movie.id}
+              className="relative group rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-            </div>
+              <div
+                className="w-full h-[250px] sm:h-[300px] bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+              </div>
 
-            <div className="absolute bottom-0 p-4 text-white">
-              <h3 className="text-lg font-semibold drop-shadow-md">
-                {movie.title}
-              </h3>
-              <p className="text-xs opacity-80 line-clamp-2">
-                {movie.overview || "Sinopsis no disponible."}
-              </p>
+              <div className="absolute bottom-0 p-4 text-white bg-gradient-to-t from-black/80 via-transparent to-transparent w-full">
+                <h3 className="text-lg font-semibold drop-shadow-md">
+                  {movie.title}
+                </h3>
+                <p className="text-xs opacity-80 line-clamp-2">
+                  {movie.overview || "Sinopsis no disponible."}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {/* Controles de paginación */}
-      <div className="flex justify-center gap-4 mt-6">
+      <div className="flex justify-center gap-4 mt-6 mb-8">
         <button
-          className="px-4 py-2 bg-red-600 text-white rounded disabled:opacity-50"
-          disabled={page === 1}
+          className="px-4 py-2 bg-red-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+          disabled={page === 1 || loading}
           onClick={() => setPage((prev) => prev - 1)}
         >
           ⬅ Anterior
         </button>
-        <span className="text-white">
+        <span className="text-white self-center select-none">
           Página {page} de {totalPages}
         </span>
         <button
-          className="px-4 py-2 bg-red-600 text-white rounded disabled:opacity-50"
-          disabled={page === totalPages}
+          className="px-4 py-2 bg-red-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+          disabled={page === totalPages || loading}
           onClick={() => setPage((prev) => prev + 1)}
         >
           Siguiente ➡
