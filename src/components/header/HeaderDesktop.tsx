@@ -35,9 +35,9 @@ const HeaderDesktop = () => {
             <li>
               <Link
                 href="/"
-                className="text-lg font-semibold hover:text-yellow-400 hover:drop-shadow-[0_0_6px_yellow] transition-all duration-300 ease-in-out"
+                className="text-lg font-semibold hover:text-red-400 hover:drop-shadow-[0_0_6px_red] transition-all duration-300 ease-in-out"
               >
-                🎬
+                Catálogo
               </Link>
             </li>
             <li>
