@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Movie } from "@/interfaces/Movie";
-import { getPopularMovies } from "@/services/movieService";
+import { getTopRatedMovies } from "@/services/movieService";
 
-export default function FeaturedMovie() {
+export default function TopRatedMovie() {
   const [movie, setMovie] = useState<Movie | null>(null);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
-    const storedData = localStorage.getItem("featuredMovie");
+    const storedData = localStorage.getItem("topRatedMovie");
 
     if (storedData) {
       const parsed = JSON.parse(storedData);
@@ -19,7 +19,7 @@ export default function FeaturedMovie() {
       }
     }
 
-    getPopularMovies().then((data) => {
+    getTopRatedMovies().then((data) => {
       if (!data.results.length) return;
 
       let newMovie: Movie;
@@ -37,7 +37,7 @@ export default function FeaturedMovie() {
 
       setMovie(newMovie);
       localStorage.setItem(
-        "featuredMovie",
+        "topRatedMovie",
         JSON.stringify({ date: today, movie: newMovie })
       );
     });
@@ -61,14 +61,14 @@ export default function FeaturedMovie() {
       {/* Capa oscura */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
-      {/* Etiqueta verde */}
-      <div className="absolute top-4 right-4 bg-emerald-500/90 text-black px-3 py-1.5 rounded-lg shadow-md text-xs sm:text-sm font-semibold uppercase tracking-wide drop-shadow-[0_0_8px_#10b981]">
-        Película del Día
+      {/* Etiqueta */}
+      <div className="absolute top-4 right-4 bg-yellow-500/90 text-black px-3 py-1.5 rounded-lg shadow-md text-xs sm:text-sm font-semibold uppercase tracking-wide drop-shadow-[0_0_8px_#ffd700]">
+        Mejor Valorada
       </div>
 
       {/* Contenido */}
       <div className="absolute bottom-0 left-0 p-5 sm:p-8 text-white max-w-2xl">
-        <h2 className="text-2xl sm:text-4xl font-extrabold mb-3 drop-shadow-[0_0_10px_#10b981] tracking-wide">
+        <h2 className="text-2xl sm:text-4xl font-extrabold mb-3 drop-shadow-[0_0_10px_#ffd700] tracking-wide">
           {movie.title}
         </h2>
         <p className="text-xs sm:text-base mb-4 line-clamp-3 opacity-90 leading-relaxed">

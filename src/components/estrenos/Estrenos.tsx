@@ -40,11 +40,11 @@ export default function Estrenos() {
       </div>
 
       {/* Contenedor derecho sin margen negativo, alineado arriba y con espacio */}
-      <div className="lg:w-1/3 flex justify-center">
+      {/* <div className="lg:w-1/3 flex justify-center">
         <div className="mt-12 w-full max-w-sm">
           <CountdownRelease />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
