@@ -14,13 +14,11 @@ export default function FeaturedMovie() {
     if (storedData) {
       const parsed = JSON.parse(storedData);
       if (parsed.date === today) {
-        // Si es el mismo día, usamos la película guardada
         setMovie(parsed.movie);
         return;
       }
     }
 
-    // Si es otro día o no hay guardado, buscamos una nueva
     getPopularMovies().then((data) => {
       if (!data.results.length) return;
 
@@ -47,6 +45,10 @@ export default function FeaturedMovie() {
 
   if (!movie) return null;
 
+  const synopsis =
+    movie.overview?.trim() ||
+    "Sinopsis no disponible. Vuelve más tarde para más información.";
+
   return (
     <section
       className="relative w-full h-[350px] md:h-[480px] rounded-xl overflow-hidden shadow-2xl group animate-fadeIn mt-10"
@@ -67,7 +69,7 @@ export default function FeaturedMovie() {
           {movie.title}
         </h2>
         <p className="text-xs sm:text-base mb-4 line-clamp-3 opacity-90 leading-relaxed">
-          {movie.overview}
+          {synopsis}
         </p>
       </div>
     </section>
