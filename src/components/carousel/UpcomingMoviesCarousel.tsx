@@ -46,7 +46,7 @@ export default function UpcomingMoviesCarousel() {
           text-center 
         "
       >
-        Próximos
+        Estrenos
       </div>
 
       {/* Espaciado para que la etiqueta no tape el carrusel */}

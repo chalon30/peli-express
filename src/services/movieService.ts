@@ -2,7 +2,6 @@ import tmdbApi from "@/api/tmdbApi";
 import { MovieResponse, Movie } from "@/interfaces/Movie";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-
 dayjs.extend(isSameOrAfter);
 
 export const getPopularMovies = async (): Promise<MovieResponse> => {
@@ -12,17 +11,7 @@ export const getPopularMovies = async (): Promise<MovieResponse> => {
 
 export const getUpcomingMovies = async (): Promise<MovieResponse> => {
   const { data } = await tmdbApi.get<MovieResponse>("/movie/upcoming");
-
-  const today = dayjs().startOf("day");
-
-  const filteredResults = data.results
-    .filter(movie => movie.release_date)
-    .filter(movie => dayjs(movie.release_date).isSameOrAfter(today, "day"));
-
-  return {
-    ...data,
-    results: filteredResults,
-  };
+  return data;
 };
 
 export const searchMovies = async (query: string): Promise<MovieResponse> => {
@@ -43,6 +32,9 @@ export const getNowPlayingMovies = async (page: number = 1): Promise<MovieRespon
   });
   return data;
 };
+
+
+//no sirve la api no devulve peliculas en estreno a la fecha posteior a hoy (recien me doy cuenta xd)
 
 /**
  * Obtiene la próxima película que se estrenará (la más cercana a hoy)
