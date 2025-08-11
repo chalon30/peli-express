@@ -5,9 +5,7 @@ import PopularMoviesCarousel from "@/components/carousel/PopularMoviesCarousel"
 import FeaturedMovie from "@/components/popular/FeaturedMovie";
 import TopRatedMovie from "@/components/top/TopRatedMovie";
 import UpcomingMoviesCarousel from "@/components/carousel/UpcomingMoviesCarousel";
-import MovieTrailer from "@/components/trailer/MovieTrailer";
-
-
+import TrendsMovies from "@/components/tendencias/TrendsMovies";
 
 export default function Home() {
   return (
@@ -17,8 +15,9 @@ export default function Home() {
         <section>
           <PopularMoviesCarousel />
           <FeaturedMovie />
-          <UpcomingMoviesCarousel />
+          <TrendsMovies />
           <TopRatedMovie />
+          <UpcomingMoviesCarousel />
         </section>
       </main>
     </>
