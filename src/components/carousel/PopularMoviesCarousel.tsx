@@ -46,7 +46,7 @@ export default function PopularMoviesCarousel() {
           text-center 
         "
       >
-        Películas Populares
+        Populares
       </div>
 
       {/* Espaciado para que la etiqueta no tape el carrusel */}

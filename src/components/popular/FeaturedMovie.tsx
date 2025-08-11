@@ -8,8 +8,40 @@ export default function FeaturedMovie() {
   const [movie, setMovie] = useState<Movie | null>(null);
 
   useEffect(() => {
+    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+    const storedData = localStorage.getItem("featuredMovie");
+
+    if (storedData) {
+      const parsed = JSON.parse(storedData);
+      if (parsed.date === today) {
+        // Si es el mismo día, usamos la película guardada
+        setMovie(parsed.movie);
+        return;
+      }
+    }
+
+    // Si es otro día o no hay guardado, buscamos una nueva
     getPopularMovies().then((data) => {
-      setMovie(data.results[0]); // primera película popular
+      if (!data.results.length) return;
+
+      let newMovie: Movie;
+      if (storedData) {
+        const prevMovieId = JSON.parse(storedData).movie.id;
+        const availableMovies = data.results.filter(
+          (m: Movie) => m.id !== prevMovieId
+        );
+        newMovie =
+          availableMovies[Math.floor(Math.random() * availableMovies.length)];
+      } else {
+        newMovie =
+          data.results[Math.floor(Math.random() * data.results.length)];
+      }
+
+      setMovie(newMovie);
+      localStorage.setItem(
+        "featuredMovie",
+        JSON.stringify({ date: today, movie: newMovie })
+      );
     });
   }, []);
 
@@ -24,15 +56,12 @@ export default function FeaturedMovie() {
         backgroundPosition: "center",
       }}
     >
-      {/* Capa oscura */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
-      {/* Etiqueta en la parte superior */}
       <div className="absolute top-4 right-4 bg-red-600/90 text-white px-3 py-1.5 rounded-lg shadow-md text-xs sm:text-sm font-semibold uppercase tracking-wide drop-shadow-[0_0_8px_#ff0000]">
         Película del Día
       </div>
 
-      {/* Contenido principal */}
       <div className="absolute bottom-0 left-0 p-5 sm:p-8 text-white max-w-2xl">
         <h2 className="text-2xl sm:text-4xl font-extrabold mb-3 drop-shadow-[0_0_10px_#ff0000] tracking-wide">
           {movie.title}
