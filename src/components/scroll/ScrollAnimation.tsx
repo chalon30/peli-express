@@ -41,7 +41,11 @@ export default function ScrollAnimation({
   return (
     <div
       ref={ref}
-      className={`${className} ${isVisible ? animationClass : "opacity-0 translate-y-10"} transition-all duration-700 ease-out`}
+      className={`${className} ${
+        isVisible
+          ? animationClass
+          : "opacity-0 translate-y-10 pointer-events-none"
+      } transition-all duration-700 ease-out will-change-transform will-change-opacity`}
     >
       {children}
     </div>
