@@ -59,67 +59,74 @@ export default function MovieDetailPage() {
   }
 
   if (!movie) {
-    return null; // o un mensaje de no encontrado
+    return null;
   }
 
   return (
     <>
-      <main className="max-w-5xl mx-auto p-4 sm:p-8 bg-gradient-to-br rounded-lg shadow-2xl mt-10 text-white">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-6 tracking-wide drop-shadow-lg text-center sm:text-left">
+      <main className="max-w-6xl mx-auto p-6 sm:p-10 rounded-lg mt-10 text-white">
+        {/* Título */}
+        <h1 className="text-3xl sm:text-4xl font-extrabold mb-10 tracking-wide drop-shadow-lg text-center sm:text-left">
           {movie.title}
         </h1>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
-          <div className="flex-shrink-0 lg:w-2/5 rounded-lg overflow-hidden shadow-lg">
-            {movie.backdrop_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
-                alt={movie.title}
-                className="w-full h-auto object-cover max-h-[300px] sm:max-h-[400px]"
-                loading="lazy"
-              />
+        {/* Contenedor principal: poster + detalles */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Poster + botón */}
+          <div className="flex flex-col items-center lg:items-start lg:w-1/3">
+            {movie.poster_path ? (
+              <div className="w-full max-w-[300px] aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
+                  alt={movie.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             ) : (
-              <div className="w-full h-[300px] sm:h-[400px] bg-gray-700 flex items-center justify-center text-gray-400 text-sm sm:text-base">
+              <div className="w-full max-w-[300px] aspect-[2/3] bg-gray-700 flex items-center justify-center text-gray-400 text-sm sm:text-base rounded-lg shadow-lg">
                 Imagen no disponible
               </div>
             )}
+
+            <button
+              onClick={() => setIsTrailerOpen(true)}
+              className="mt-6 w-full max-w-[300px] bg-red-600 hover:bg-red-700 transition text-white font-semibold py-3 rounded-lg shadow-md text-base"
+            >
+              Ver Trailer
+            </button>
           </div>
 
-          <section className="lg:w-3/5 flex flex-col justify-between text-sm sm:text-base">
-            <p className="leading-relaxed mb-6">
+          {/* Sinopsis + detalles */}
+          <section className="lg:w-2/2 flex flex-col text-sm sm:text-base">
+            <h2 className="text-2xl font-semibold mb-6">Sinopsis</h2>
+            <p className="leading-relaxed mb-8">
               {movie.overview || "Sinopsis no disponible."}
             </p>
 
-            <div className="flex flex-wrap gap-3 sm:gap-4 mb-6">
+            <div className="flex flex-wrap gap-4">
               {movie.genres && movie.genres.length > 0 && (
-                <span className="bg-red-600 px-3 py-1 rounded-full text-white font-semibold shadow-md text-xs sm:text-sm">
+                <span className="bg-red-600 px-4 py-2 rounded-full text-white font-semibold shadow-md text-sm">
                   Géneros: {movie.genres.map((g) => g.name).join(", ")}
                 </span>
               )}
 
               {movie.release_date && (
-                <span className="bg-gray-800 px-3 py-1 rounded-full shadow-md text-xs sm:text-sm">
+                <span className="bg-gray-800 px-4 py-2 rounded-full shadow-md text-sm">
                   Estreno: {movie.release_date}
                 </span>
               )}
 
               {movie.runtime && (
-                <span className="bg-gray-800 px-3 py-1 rounded-full shadow-md text-xs sm:text-sm">
+                <span className="bg-gray-800 px-4 py-2 rounded-full shadow-md text-sm">
                   Duración: {movie.runtime} min
                 </span>
               )}
 
-              <span className="bg-yellow-200 px-3 py-1 rounded-full font-bold text-black shadow-md flex items-center gap-1 text-xs sm:text-sm">
+              <span className="bg-yellow-200 px-4 py-2 rounded-full font-bold text-black shadow-md flex items-center gap-2 text-sm">
                 ⭐ {movie.vote_average.toFixed(1)}
               </span>
             </div>
-
-            <button
-              onClick={() => setIsTrailerOpen(true)}
-              className="bg-red-600 px-5 py-2.5 rounded-xl font-semibold shadow-md hover:bg-red-700 transition text-sm sm:text-base w-full"
-            >
-              Ver Trailer
-            </button>
           </section>
         </div>
       </main>
