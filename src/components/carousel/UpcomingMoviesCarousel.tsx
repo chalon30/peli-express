@@ -54,7 +54,7 @@ export default function UpcomingMoviesCarousel() {
           -translate-x-1/2
           -translate-y-1/2
           z-10
-          text-center 
+          text-center
         "
       >
         Estrenos
@@ -67,11 +67,11 @@ export default function UpcomingMoviesCarousel() {
           spaceBetween={24}
           breakpoints={{
             320: { slidesPerView: 1.5 },
-            640: { slidesPerView: 2.5 },
-            1024: { slidesPerView: 4 },
+            640: { slidesPerView: 3 },
+            1024: { slidesPerView: 5 }, // 🔹 Siempre 5 portadas en escritorio
           }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
-          loop={movies.length >= 6}
+          loop={movies.length >= 5}
           className="w-full"
         >
           {movies.map((movie) => (

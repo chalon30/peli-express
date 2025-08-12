@@ -68,11 +68,11 @@ export default function PopularMoviesCarousel() {
             spaceBetween={24}
             breakpoints={{
               320: { slidesPerView: 1.5 },
-              640: { slidesPerView: 2.5 },
-              1024: { slidesPerView: 4 },
+              640: { slidesPerView: 3 },
+              1024: { slidesPerView: 5 }, // 🔹 5 portadas en escritorio
             }}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
-            loop={movies.length >= 6}
+            loop={movies.length >= 5}
             className="w-full"
           >
             {movies.map((movie) => (
