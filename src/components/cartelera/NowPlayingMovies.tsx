@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Movie } from "@/interfaces/Movie";
 import { getNowPlayingMovies } from "@/services/movieService";
@@ -61,9 +62,10 @@ export default function NowPlayingMovies() {
         {!loading &&
           !error &&
           movies.map((movie) => (
-            <div
+            <Link
               key={movie.id}
-              className="relative group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300"
+              href={`/catalog/${movie.id}`}
+              className="relative group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 block"
             >
               <div
                 className="w-full h-[140px] sm:h-[180px] bg-cover bg-center"
@@ -82,7 +84,7 @@ export default function NowPlayingMovies() {
                   {movie.overview || "Sinopsis no disponible."}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
       </div>
 

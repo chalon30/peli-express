@@ -44,6 +44,17 @@ export const getMovieVideos = async (movieId: number) => {
   }
 };
 
+export async function getMovieDetails(id: string): Promise<Movie> {
+  try {
+    const { data } = await tmdbApi.get<Movie>(`/movie/${id}`, {
+      params: { language: "es-ES" },
+    });
+    return data;
+  } catch (error) {
+    console.error("Error en getMovieDetails:", error);
+    throw new Error("No se pudo obtener los detalles");
+  }
+}
 
 
 //no sirve la api no devulve peliculas en estreno a la fecha posteior a hoy (recien me doy cuenta xd)
