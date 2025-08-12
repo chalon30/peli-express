@@ -32,8 +32,7 @@ export default function FeaturedMovie() {
         newMovie =
           availableMovies[Math.floor(Math.random() * availableMovies.length)];
       } else {
-        newMovie =
-          data.results[Math.floor(Math.random() * data.results.length)];
+        newMovie = data.results[Math.floor(Math.random() * data.results.length)];
       }
 
       setMovie(newMovie);
@@ -52,16 +51,16 @@ export default function FeaturedMovie() {
 
   return (
     <ScrollAnimation animationClass="animate-fadeInLeft">
-      <section
-        className="relative w-full h-[350px] md:h-[480px] overflow-hidden shadow-2xl group mt-10"
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <section className="relative mx-auto max-w-[1400px] shadow-2xl group mt-10">
+        <img
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          alt={movie.title}
+          className="w-full h-auto block"
+          style={{ maxHeight: "800px", objectPosition: "left" }}
+        />
+
         {/* Capa oscura */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none"></div>
 
         {/* Etiqueta verde */}
         <div className="absolute top-4 right-4 bg-emerald-500/90 text-black px-3 py-1.5 rounded-lg shadow-md text-xs sm:text-sm font-semibold uppercase tracking-wide drop-shadow-[0_0_8px_#10b981]">

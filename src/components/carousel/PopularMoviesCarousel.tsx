@@ -29,34 +29,34 @@ export default function PopularMoviesCarousel() {
 
   return (
     <>
-      <div className="w-full max-w-7xl mx-auto py-6 px-4 relative">
+      <div className="w-full max-w-[1440px] mx-auto py-6 px-4 relative">
         {/* Etiqueta */}
         <div
           className="
-          inline-flex
-          bg-red-700 bg-opacity-90
-          rounded-full
-          px-6 py-2
-          text-white
-          font-extrabold
-          text-xl
-          tracking-wide
-          drop-shadow-[0_0_8px_#ff0000]
-          hover:bg-red-600
-          hover:drop-shadow-[0_0_16px_#ff4d4d]
-          transition
-          duration-300
-          cursor-default
-          select-none
-          absolute
-          top-0
-          left-1/2
-          transform
-          -translate-x-1/2
-          -translate-y-1/2
-          z-10
-          text-center 
-        "
+            inline-flex
+            bg-red-700 bg-opacity-90
+            rounded-full
+            px-6 py-2
+            text-white
+            font-extrabold
+            text-xl
+            tracking-wide
+            drop-shadow-[0_0_8px_#ff0000]
+            hover:bg-red-600
+            hover:drop-shadow-[0_0_16px_#ff4d4d]
+            transition
+            duration-300
+            cursor-default
+            select-none
+            absolute
+            top-0
+            left-1/2
+            transform
+            -translate-x-1/2
+            -translate-y-1/2
+            z-10
+            text-center
+          "
         >
           Populares
         </div>
@@ -65,11 +65,11 @@ export default function PopularMoviesCarousel() {
         <div className="pt-10">
           <Swiper
             modules={[Autoplay]}
-            spaceBetween={16}
+            spaceBetween={24}
             breakpoints={{
-              320: { slidesPerView: 2 },
-              640: { slidesPerView: 3 },
-              1024: { slidesPerView: 6 },
+              320: { slidesPerView: 1.5 },
+              640: { slidesPerView: 2.5 },
+              1024: { slidesPerView: 4 },
             }}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             loop={movies.length >= 6}
@@ -77,14 +77,13 @@ export default function PopularMoviesCarousel() {
           >
             {movies.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <div className="relative group overflow-hidden rounded-xl shadow-md transition-all duration-300">
+                <div className="relative group overflow-hidden rounded-xl shadow-md transition-all duration-300 aspect-[2/3]">
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}
-                    // Zoom solo en desktop (md y superior)
-                    className="rounded-xl transition-transform duration-500 cursor-pointer md:group-hover:scale-110"
+                    className="w-full h-full object-cover rounded-xl transition-transform duration-500 cursor-pointer md:group-hover:scale-110"
                   />
-                  {/* Overlay visible siempre en móviles, solo en hover en desktop */}
+                  {/* Overlay */}
                   <div
                     className="
                       absolute inset-0

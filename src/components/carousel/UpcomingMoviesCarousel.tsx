@@ -28,7 +28,7 @@ export default function UpcomingMoviesCarousel() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-6 px-4 relative">
+    <div className="w-full max-w-[1440px] mx-auto py-6 px-4 relative">
       {/* Etiqueta */}
       <div
         className="
@@ -60,32 +60,31 @@ export default function UpcomingMoviesCarousel() {
         Estrenos
       </div>
 
-      {/* Espaciado para que la etiqueta no tape el carrusel */}
+      {/* Carrusel */}
       <div className="pt-10">
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={16}
+          spaceBetween={24}
           breakpoints={{
-            320: { slidesPerView: 2 },
-            640: { slidesPerView: 3 },
-            1024: { slidesPerView: 6 },
+            320: { slidesPerView: 1.5 },
+            640: { slidesPerView: 2.5 },
+            1024: { slidesPerView: 4 },
           }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={movies.length >= 6}
           className="w-full"
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <div className="relative group overflow-hidden rounded-xl shadow-md transition-all duration-300">
+              <div
+                className="relative group overflow-hidden rounded-xl shadow-md transition-all duration-300 aspect-[2/3]"
+              >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
-                  className="rounded-xl transition-transform duration-500 cursor-pointer md:group-hover:scale-110"
+                  className="w-full h-full object-cover rounded-xl transition-transform duration-500 cursor-pointer md:group-hover:scale-110"
                 />
-                {/* Overlay visible siempre en móviles, solo en hover en desktop */}
+                {/* Overlay */}
                 <div
                   className="
                     absolute inset-0
