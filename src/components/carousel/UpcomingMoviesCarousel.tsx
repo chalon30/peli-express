@@ -35,10 +35,10 @@ export default function UpcomingMoviesCarousel() {
           inline-flex
           bg-red-700 bg-opacity-90
           rounded-full
-          px-6 py-2
+          px-4 sm:px-6 py-1.5 sm:py-2
           text-white
           font-extrabold
-          text-xl
+          text-lg sm:text-xl
           tracking-wide
           drop-shadow-[0_0_8px_#ff0000]
           hover:bg-red-600
@@ -64,11 +64,11 @@ export default function UpcomingMoviesCarousel() {
       <div className="pt-10">
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={24}
+          spaceBetween={16}
           breakpoints={{
-            320: { slidesPerView: 1.5 },
-            640: { slidesPerView: 3 },
-            1024: { slidesPerView: 5 }, // 🔹 Siempre 5 portadas en escritorio
+            320: { slidesPerView: 2 },   // 🔹 2 portadas en móviles
+            640: { slidesPerView: 3 },   // 🔹 3 portadas en tablets pequeñas
+            1024: { slidesPerView: 5 },  // 🔹 5 portadas en escritorio
           }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={movies.length >= 5}
@@ -76,9 +76,7 @@ export default function UpcomingMoviesCarousel() {
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <div
-                className="relative group overflow-hidden rounded-xl shadow-md transition-all duration-300 aspect-[2/3]"
-              >
+              <div className="relative group overflow-hidden rounded-xl shadow-md transition-all duration-300 aspect-[2/3]">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
@@ -92,18 +90,18 @@ export default function UpcomingMoviesCarousel() {
                     opacity-100
                     md:opacity-0 md:group-hover:opacity-100
                     transition-opacity duration-500
-                    flex flex-col justify-end p-4 space-y-2
+                    flex flex-col justify-end p-3 sm:p-4 space-y-1 sm:space-y-2
                   "
                 >
-                  <h3 className="text-lg font-bold text-red-500 drop-shadow-[0_0_6px_#ff0000]">
+                  <h3 className="text-sm sm:text-lg font-bold text-red-500 drop-shadow-[0_0_6px_#ff0000]">
                     {movie.title}
                   </h3>
-                  <span className="text-xs text-gray-300">
+                  <span className="text-[10px] sm:text-xs text-gray-300">
                     Estreno: {new Date(movie.release_date).toLocaleDateString("es-ES")}
                   </span>
                   <button
                     onClick={() => openTrailer(movie.id)}
-                    className="self-start bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white text-sm px-4 py-1 rounded shadow-md"
+                    className="self-start bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white text-xs sm:text-sm px-3 sm:px-4 py-1 rounded shadow-md"
                     type="button"
                   >
                     Ver Trailer

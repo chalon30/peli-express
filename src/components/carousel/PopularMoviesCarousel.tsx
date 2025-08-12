@@ -36,10 +36,10 @@ export default function PopularMoviesCarousel() {
             inline-flex
             bg-red-700 bg-opacity-90
             rounded-full
-            px-6 py-2
+            px-4 sm:px-6 py-1.5 sm:py-2
             text-white
             font-extrabold
-            text-xl
+            text-lg sm:text-xl
             tracking-wide
             drop-shadow-[0_0_8px_#ff0000]
             hover:bg-red-600
@@ -65,11 +65,13 @@ export default function PopularMoviesCarousel() {
         <div className="pt-10">
           <Swiper
             modules={[Autoplay]}
-            spaceBetween={24}
+            spaceBetween={16}
             breakpoints={{
-              320: { slidesPerView: 1.5 },
-              640: { slidesPerView: 3 },
-              1024: { slidesPerView: 5 }, // 🔹 5 portadas en escritorio
+              0: { slidesPerView: 1 },      // Teléfonos muy pequeños
+              360: { slidesPerView: 1.3 },  // Un poco más de 1
+              480: { slidesPerView: 2 },    // Dos portadas
+              640: { slidesPerView: 3 },    // Tres portadas
+              1024: { slidesPerView: 5 },   // Cinco portadas en escritorio
             }}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             loop={movies.length >= 5}
@@ -91,13 +93,13 @@ export default function PopularMoviesCarousel() {
                       opacity-100
                       md:opacity-0 md:group-hover:opacity-100
                       transition-opacity duration-500
-                      flex flex-col justify-end p-4 space-y-2
+                      flex flex-col justify-end p-3 sm:p-4 space-y-1 sm:space-y-2
                     "
                   >
-                    <h3 className="text-lg font-bold text-red-500 drop-shadow-[0_0_6px_#ff0000]">
+                    <h3 className="text-sm sm:text-lg font-bold text-red-500 drop-shadow-[0_0_6px_#ff0000]">
                       {movie.title}
                     </h3>
-                    <span className="text-xs text-gray-300">
+                    <span className="text-[10px] sm:text-xs text-gray-300">
                       Estreno:{" "}
                       {movie.release_date
                         ? new Date(movie.release_date).toLocaleDateString("es-ES")
@@ -105,7 +107,7 @@ export default function PopularMoviesCarousel() {
                     </span>
                     <button
                       onClick={() => openTrailer(movie.id)}
-                      className="self-start bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white text-sm px-4 py-1 rounded shadow-md"
+                      className="self-start bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white text-xs sm:text-sm px-3 sm:px-4 py-1 rounded shadow-md"
                       type="button"
                     >
                       Ver Trailer
