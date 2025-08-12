@@ -67,11 +67,9 @@ export default function PopularMoviesCarousel() {
             modules={[Autoplay]}
             spaceBetween={16}
             breakpoints={{
-              0: { slidesPerView: 1 },      // Teléfonos muy pequeños
-              360: { slidesPerView: 1.3 },  // Un poco más de 1
-              480: { slidesPerView: 2 },    // Dos portadas
-              640: { slidesPerView: 3 },    // Tres portadas
-              1024: { slidesPerView: 5 },   // Cinco portadas en escritorio
+              320: { slidesPerView: 2 },   // 🔹 Siempre 2 portadas en móviles
+              640: { slidesPerView: 3 },   // 🔹 3 portadas en tablets
+              1024: { slidesPerView: 5 },  // 🔹 5 portadas en escritorio
             }}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             loop={movies.length >= 5}
