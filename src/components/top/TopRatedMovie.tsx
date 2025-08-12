@@ -51,7 +51,7 @@ export default function TopRatedMovie() {
 
   return (
     <ScrollAnimation animationClass="animate-fadeInRight">
-      <section className="relative mx-auto max-w-[1400px] shadow-2xl group mt-10">
+      <section className="relative mx-auto max-w-[1400px] shadow-2xl group">
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
